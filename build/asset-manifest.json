@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/static/css/main.1d652116.css",
+    "main.js": "/static/js/main.2720c25a.js",
+    "static/js/453.21f478df.chunk.js": "/static/js/453.21f478df.chunk.js",
+    "static/media/Kannadi Poove.mp3": "/static/media/Kannadi Poove.da422f8d0f1167cb3db2.mp3",
+    "static/media/Sithira-Puthiri.mp3": "/static/media/Sithira-Puthiri.1452bd03ced66c3cf192.mp3",
+    "static/media/Vazhithunaiye.mp3": "/static/media/Vazhithunaiye.4bcdcb8102ce6a3cd8c7.mp3",
+    "static/media/Yedi.mp3": "/static/media/Yedi.4a4a3865f1f98717b937.mp3",
+    "static/media/Dhinam Oru Kavithai.mp3": "/static/media/Dhinam Oru Kavithai.b4c0c8e880b30104b3f6.mp3",
+    "static/media/background.webp": "/static/media/background.5a0fc95ffbe4bae81113.webp",
+    "index.html": "/index.html",
+    "main.1d652116.css.map": "/static/css/main.1d652116.css.map",
+    "main.2720c25a.js.map": "/static/js/main.2720c25a.js.map",
+    "453.21f478df.chunk.js.map": "/static/js/453.21f478df.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1d652116.css",
+    "static/js/main.2720c25a.js"
+  ]
+}
