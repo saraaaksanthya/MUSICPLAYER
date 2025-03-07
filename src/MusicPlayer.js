@@ -5,6 +5,7 @@ import audio2 from './assets/Sithira-Puthiri.mp3';
 import audio3 from './assets/Yedi.mp3';
 import audio4 from './assets/Dhinam Oru Kavithai.mp3';
 import audio5 from './assets/Vazhithunaiye.mp3';
+import audio6 from './assets/Quit Pannuda.mp3';
 import albumArt from './assets/album-art.jpeg';
 
 import background from './assets/background.webp';
@@ -24,6 +25,7 @@ const MusicPlayer = () => {
     { src: audio3, title: "Yedi", artist: "GV Prakash", duration: "3:21" },
     { src: audio4, title: "Dhinam oru Kavithai", artist: "Sriram Srinivasan", duration: "1:42" },
     { src: audio5, title: "Vazhithunaye", artist: "Leon James", duration: "3:38" },
+    { src: audio6, title: "Quit Pannuda", artist: "Anirudh Ravichandher", duration: "4:16" },
   ];
 
   const togglePlayPause = () => {
