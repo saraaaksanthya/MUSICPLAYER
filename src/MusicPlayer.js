@@ -11,6 +11,10 @@ import audio9 from './assets/K for Kabaradakkam.mp3';
 import audio10 from './assets/Thaaye Thaaye.mp3';
 import albumArt from './assets/album-art.jpeg';
 import background from './assets/background.webp';
+import previousLogo from './assets/previous.png';
+import playLogo from './assets/play.png';
+import pauseLogo from './assets/pause.png';
+import nextLogo from './assets/next.png';
 import './MusicPlayer.css';
 
 const MusicPlayer = () => {
@@ -117,9 +121,17 @@ const MusicPlayer = () => {
           <p>{audioFiles[currentTrackIndex].artist}</p>
           <p>{audioFiles[currentTrackIndex].duration}</p>
         </div>
-        <button onClick={previousTrack}><span>Previous</span></button>
-        <button onClick={togglePlayPause}><span>{isPlaying ? 'Pause' : 'Play'}</span></button>
-        <button onClick={nextTrack}><span>Next</span></button>
+        <div className="controls">
+          <button onClick={previousTrack}>
+            <img src={previousLogo} alt="Previous" className="control-icon" />
+          </button>
+          <button onClick={togglePlayPause}>
+            <img src={isPlaying ? pauseLogo : playLogo} alt="Play/Pause" className="control-icon" />
+          </button>
+          <button onClick={nextTrack}>
+            <img src={nextLogo} alt="Next" className="control-icon" />
+          </button>
+        </div>
         <div className="progress-bar">
           <input
             type="range"

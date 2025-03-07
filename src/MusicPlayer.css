@@ -28,10 +28,10 @@ body, html {
   }
   
   .music-player {
-    background-color: rgba(93, 92, 92, 0.8);
+    background-color: rgba(50, 12, 12, 0.8);
     padding: 20px;
     width: 200px;
-    height: 400px;
+    height: 300px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     display: flex;
@@ -58,20 +58,28 @@ body, html {
   
   .track-details {
     text-align: center;
+    color: antiquewhite;
   }
   
   .track-details h3 {
     margin: 0;
     font-size: 1.2em;
+    color: rgb(182, 248, 227);
   }
   
   .track-details p {
     margin: 0;
+    color: rgb(248, 218, 249);
   }
   
-  
+  .progress-bar {
+    margin-top: 20px;  /* Add margin to move progress bar down */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   .progress-range {
-    width: 100%;
+    width: 1000%;
     appearance: none;
     height: 8px;
     border-radius: 5px;
@@ -86,7 +94,7 @@ body, html {
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background: #4CAF50;
+    background: rgb(203, 255, 135);
     cursor: pointer;
   }
   
@@ -99,7 +107,18 @@ body, html {
   }
   
   
+  .controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;  /* Adjust the gap between buttons as needed */
+    margin-top: 20px;
+  }
   
+  .control-icon {
+    width: 20px;  /* Adjust the size of the icons as needed */
+    height: 20px;
+  }
   
   button {
     margin: 5px;
