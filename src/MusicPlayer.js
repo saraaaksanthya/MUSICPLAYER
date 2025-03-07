@@ -1,4 +1,3 @@
-// MusicPlayer.js
 import React, { useRef, useState, useEffect } from 'react';
 import audio1 from './assets/Kannadi Poove.mp3';
 import audio2 from './assets/Sithira-Puthiri.mp3';
@@ -11,17 +10,16 @@ import audio8 from './assets/Yennai Izhukkuthadi.mp3';
 import audio9 from './assets/K for Kabaradakkam.mp3';
 import audio10 from './assets/Thaaye Thaaye.mp3';
 import albumArt from './assets/album-art.jpeg';
-
 import background from './assets/background.webp';
-
 import './MusicPlayer.css';
-
 
 const MusicPlayer = () => {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [progress, setProgress] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
 
   const audioFiles = [
     { src: audio1, title: "Kannadi Poove", artist: "Santhosh Narayanan", duration: "4:21" },
@@ -34,7 +32,6 @@ const MusicPlayer = () => {
     { src: audio8, title: "Yennai Izhukkuthadi", artist: "AR Rahman", duration: "3:48" },
     { src: audio9, title: "K for Kabaradakkam", artist: "Asal Kolaar", duration: "2:25" },
     { src: audio10, title: "Thaaye Thaaye", artist: "Sid Sriram", duration: "3:38" },
-    
   ];
 
   const togglePlayPause = () => {
@@ -49,6 +46,7 @@ const MusicPlayer = () => {
   const updateProgress = () => {
     const currentProgress = (audioRef.current.currentTime / audioRef.current.duration) * 100;
     setProgress(currentProgress);
+    setCurrentTime(audioRef.current.currentTime);
   };
 
   const nextTrack = () => {
@@ -77,6 +75,7 @@ const MusicPlayer = () => {
       const minutes = Math.floor(duration / 60);
       const seconds = duration % 60;
       audioFiles[currentTrackIndex].duration = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+      setDuration(audioRef.current.duration);
     };
     if (audioRef.current) {
       audioRef.current.addEventListener('loadedmetadata', handleLoadedMetadata);
@@ -84,6 +83,22 @@ const MusicPlayer = () => {
     return () => {
       if (audioRef.current) {
         audioRef.current.removeEventListener('loadedmetadata', handleLoadedMetadata);
+      }
+    };
+  }, [currentTrackIndex]);
+
+  useEffect(() => {
+    const handleSongEnd = () => {
+      nextTrack();
+    };
+
+    if (audioRef.current) {
+      audioRef.current.addEventListener('ended', handleSongEnd);
+    }
+
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.removeEventListener('ended', handleSongEnd);
       }
     };
   }, [currentTrackIndex]);
@@ -106,6 +121,17 @@ const MusicPlayer = () => {
         <button onClick={togglePlayPause}><span>{isPlaying ? 'Pause' : 'Play'}</span></button>
         <button onClick={nextTrack}><span>Next</span></button>
         <div className="progress-bar">
+          <input
+            type="range"
+            value={currentTime}
+            max={audioRef.current ? audioRef.current.duration : 0}
+            onChange={(e) => {
+              const audio = audioRef.current;
+              audio.currentTime = e.target.value;
+              setCurrentTime(e.target.value);
+            }}
+            className="progress-range"
+          />
           <div className="progress" style={{ width: `${progress}%` }}></div>
         </div>
       </div>
