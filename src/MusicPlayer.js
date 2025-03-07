@@ -6,6 +6,10 @@ import audio3 from './assets/Yedi.mp3';
 import audio4 from './assets/Dhinam Oru Kavithai.mp3';
 import audio5 from './assets/Vazhithunaiye.mp3';
 import audio6 from './assets/Quit Pannuda.mp3';
+import audio7 from './assets/Thangamey.mp3';
+import audio8 from './assets/Yennai Izhukkuthadi.mp3';
+import audio9 from './assets/K for Kabaradakkam.mp3';
+import audio10 from './assets/Thaaye Thaaye.mp3';
 import albumArt from './assets/album-art.jpeg';
 
 import background from './assets/background.webp';
@@ -26,6 +30,11 @@ const MusicPlayer = () => {
     { src: audio4, title: "Dhinam oru Kavithai", artist: "Sriram Srinivasan", duration: "1:42" },
     { src: audio5, title: "Vazhithunaye", artist: "Leon James", duration: "3:38" },
     { src: audio6, title: "Quit Pannuda", artist: "Anirudh Ravichandher", duration: "4:16" },
+    { src: audio7, title: "Thangamey", artist: "Anirudh Ravichandher", duration: "4:22" },
+    { src: audio8, title: "Yennai Izhukkuthadi", artist: "AR Rahman", duration: "3:48" },
+    { src: audio9, title: "K for Kabaradakkam", artist: "Asal Kolaar", duration: "2:25" },
+    { src: audio10, title: "Thaaye Thaaye", artist: "Sid Sriram", duration: "3:38" },
+    
   ];
 
   const togglePlayPause = () => {
