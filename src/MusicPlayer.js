@@ -10,14 +10,13 @@ import audio8 from './assets/Yennai Izhukkuthadi.mp3';
 import audio9 from './assets/K for Kabaradakkam.mp3';
 import audio10 from './assets/Thaaye Thaaye.mp3';
 import albumArt from './assets/album-art.jpeg';
-import background from './assets/background.webp';
 import previousLogo from './assets/previous.png';
 import playLogo from './assets/play.png';
 import pauseLogo from './assets/pause.png';
 import nextLogo from './assets/next.png';
 import './MusicPlayer.css';
 
-const MusicPlayer = () => {
+const MusicPlayer = ({ searchQuery }) => {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
@@ -38,6 +37,25 @@ const MusicPlayer = () => {
     { src: audio10, title: "Thaaye Thaaye", artist: "Sid Sriram", duration: "3:38" },
   ];
 
+  const [filteredSongs, setFilteredSongs] = useState(audioFiles);
+
+  useEffect(() => {
+    if (searchQuery) {
+      const filtered = audioFiles.filter(song =>
+        song.title.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFilteredSongs(filtered);
+    } else {
+      setFilteredSongs(audioFiles);
+    }
+  }, [searchQuery]);
+
+  useEffect(() => {
+    if (filteredSongs.length > 0) {
+      setCurrentTrackIndex(0);
+    }
+  }, [filteredSongs]);
+
   const togglePlayPause = () => {
     if (isPlaying) {
       audioRef.current.pause();
@@ -54,7 +72,7 @@ const MusicPlayer = () => {
   };
 
   const nextTrack = () => {
-    setCurrentTrackIndex((prevIndex) => (prevIndex + 1) % audioFiles.length);
+    setCurrentTrackIndex((prevIndex) => (prevIndex + 1) % filteredSongs.length);
     setIsPlaying(false);
     setTimeout(() => {
       audioRef.current.load();
@@ -64,7 +82,7 @@ const MusicPlayer = () => {
   };
 
   const previousTrack = () => {
-    setCurrentTrackIndex((prevIndex) => (prevIndex - 1 + audioFiles.length) % audioFiles.length);
+    setCurrentTrackIndex((prevIndex) => (prevIndex - 1 + filteredSongs.length) % filteredSongs.length);
     setIsPlaying(false);
     setTimeout(() => {
       audioRef.current.load();
@@ -75,11 +93,13 @@ const MusicPlayer = () => {
 
   useEffect(() => {
     const handleLoadedMetadata = () => {
-      const duration = Math.floor(audioRef.current.duration);
-      const minutes = Math.floor(duration / 60);
-      const seconds = duration % 60;
-      audioFiles[currentTrackIndex].duration = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-      setDuration(audioRef.current.duration);
+      if (audioRef.current && filteredSongs[currentTrackIndex]) {
+        const duration = Math.floor(audioRef.current.duration);
+        const minutes = Math.floor(duration / 60);
+        const seconds = duration % 60;
+        filteredSongs[currentTrackIndex].duration = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        setDuration(audioRef.current.duration);
+      }
     };
     if (audioRef.current) {
       audioRef.current.addEventListener('loadedmetadata', handleLoadedMetadata);
@@ -89,7 +109,7 @@ const MusicPlayer = () => {
         audioRef.current.removeEventListener('loadedmetadata', handleLoadedMetadata);
       }
     };
-  }, [currentTrackIndex]);
+  }, [currentTrackIndex, filteredSongs]);
 
   useEffect(() => {
     const handleSongEnd = () => {
@@ -105,47 +125,53 @@ const MusicPlayer = () => {
         audioRef.current.removeEventListener('ended', handleSongEnd);
       }
     };
-  }, [currentTrackIndex]);
+  }, [currentTrackIndex, filteredSongs]);
 
   return (
     <div className="music-player-container">
       <div className="music-player">
-        <audio
-          ref={audioRef}
-          src={audioFiles[currentTrackIndex].src}
-          onTimeUpdate={updateProgress}
-        ></audio>
-        <img src={albumArt} alt="Album Art" className="album-art" />
-        <div className="track-details">
-          <h3>{audioFiles[currentTrackIndex].title}</h3>
-          <p>{audioFiles[currentTrackIndex].artist}</p>
-          <p>{audioFiles[currentTrackIndex].duration}</p>
-        </div>
-        <div className="controls">
-          <button onClick={previousTrack}>
-            <img src={previousLogo} alt="Previous" className="control-icon" />
-          </button>
-          <button onClick={togglePlayPause}>
-            <img src={isPlaying ? pauseLogo : playLogo} alt="Play/Pause" className="control-icon" />
-          </button>
-          <button onClick={nextTrack}>
-            <img src={nextLogo} alt="Next" className="control-icon" />
-          </button>
-        </div>
-        <div className="progress-bar">
-          <input
-            type="range"
-            value={currentTime}
-            max={audioRef.current ? audioRef.current.duration : 0}
-            onChange={(e) => {
-              const audio = audioRef.current;
-              audio.currentTime = e.target.value;
-              setCurrentTime(e.target.value);
-            }}
-            className="progress-range"
-          />
-          <div className="progress" style={{ width: `${progress}%` }}></div>
-        </div>
+        {filteredSongs.length > 0 && filteredSongs[currentTrackIndex] ? (
+          <>
+            <audio
+              ref={audioRef}
+              src={filteredSongs[currentTrackIndex].src}
+              onTimeUpdate={updateProgress}
+            ></audio>
+            <img src={albumArt} alt="Album Art" className="album-art" />
+            <div className="track-details">
+              <h3>{filteredSongs[currentTrackIndex].title}</h3>
+              <p>{filteredSongs[currentTrackIndex].artist}</p>
+              <p>{filteredSongs[currentTrackIndex].duration}</p>
+            </div>
+            <div className="controls">
+              <button onClick={previousTrack}>
+                <img src={previousLogo} alt="Previous" className="control-icon" />
+              </button>
+              <button onClick={togglePlayPause}>
+                <img src={isPlaying ? pauseLogo : playLogo} alt="Play/Pause" className="control-icon" />
+              </button>
+              <button onClick={nextTrack}>
+                <img src={nextLogo} alt="Next" className="control-icon" />
+              </button>
+            </div>
+            <div className="progress-bar">
+              <input
+                type="range"
+                value={currentTime}
+                max={audioRef.current ? audioRef.current.duration : 0}
+                onChange={(e) => {
+                  const audio = audioRef.current;
+                  audio.currentTime = e.target.value;
+                  setCurrentTime(e.target.value);
+                }}
+                className="progress-range"
+              />
+              <div className="progress" style={{ width: `${progress}%` }}></div>
+            </div>
+          </>
+        ) : (
+          <p>No songs found.</p>
+        )}
       </div>
     </div>
   );

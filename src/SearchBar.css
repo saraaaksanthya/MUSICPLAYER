@@ -1,0 +1,25 @@
+/* src/SearchBar.css */
+
+.search-bar {
+    padding: 5px;
+    width: 30%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.3);
+    color: #fff;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+  }
+  
+  .search-bar:focus {
+    border-color: #007bff;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+  
+  .search-bar::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
