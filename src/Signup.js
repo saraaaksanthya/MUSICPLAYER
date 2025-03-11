@@ -14,7 +14,7 @@ const Signup = ({ onLogin }) => {
     const newUser = { name, email, password };
 
     try {
-      const res = await axios.post('http://192.168.1.9:5000/api/auth/register', newUser);
+      const res = await axios.post('http://localhost:5000/api/auth/register', newUser);
       if (res && res.data) {
         onLogin(res.data.token);
       } else {

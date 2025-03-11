@@ -14,7 +14,7 @@ const Login = ({ onLogin }) => {
     const user = { email, password };
 
     try {
-      const res = await axios.post('http://192.168.1.9:5000/api/auth/login', user);
+      const res = await axios.post('http://localhost:5000/api/auth/login', user);
       if (res && res.data) {
         onLogin(res.data.token);
       } else {
