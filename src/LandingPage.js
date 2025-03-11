@@ -1,4 +1,5 @@
 import React from 'react';
+//import './LandingPage.css'; // Import the CSS file
 
 const LandingPage = ({ onLoginClick, onSignupClick }) => {
   return (

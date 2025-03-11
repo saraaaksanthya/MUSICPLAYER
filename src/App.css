@@ -6,7 +6,7 @@
 
 .App {
   text-align: center;
-  background-image: url('./assets/background.webp');
+  background-image: url('./assets/lp\ bg.jpg');
   background-size: cover;
   background-position: center;
   height: 100vh;
@@ -14,7 +14,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: rgb(240, 227, 227);
+  color: rgb(205, 39, 39);
 }
 
 .heading {
@@ -22,7 +22,8 @@
 }
 
 .App h1{
-  background-color: #370101ba;
+  background-color: #4a494971;
+  color: #012245;
 }
 .App-logo {
   height: 40vmin;
@@ -37,14 +38,14 @@
   margin-top: 50px;
 }
 .landing-page h2{
-  color: #471616;
+  color: #012245;
 }
 .landing-page h1{
   background-color: #beb4b400;
-  color: #471616;
+  color: #012245;
 }
 .welcome-message {
-  background-color: #beb4b496; /* Light gray background color */
+  background-color: #4a494971; /* Light gray background color */
   padding: 20px;
   border-radius: 10px;
   margin-bottom: 20px;
