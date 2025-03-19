@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 import MusicPlayer from './MusicPlayer';
+
 import SearchBar from './SearchBar';
 import Signup from './Signup';
 import Login from './Login';
