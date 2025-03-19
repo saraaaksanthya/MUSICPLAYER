@@ -33,7 +33,7 @@ app.use((err, req, res, next) => {
 
 const PORT = process.env.PORT || 5000;
 
-mongoose.connect('mongodb://localhost/musicApp', { 
+mongoose.connect('mongodb://192.168.1.13/musicApp', { // Updated MongoDB connection string
   useNewUrlParser: true, 
   useUnifiedTopology: true,
   serverSelectionTimeoutMS: 30000 
