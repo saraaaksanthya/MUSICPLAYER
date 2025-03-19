@@ -14,7 +14,8 @@ const Login = ({ onLogin }) => {
     const user = { email, password };
 
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/login', user);
+      // Update the URL to use your local IP address instead of localhost
+      const res = await axios.post('http://192.168.1.13:5000/api/auth/login', user);
       if (res && res.data) {
         onLogin(res.data.token);
       } else {
